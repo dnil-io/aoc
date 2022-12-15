@@ -1,7 +1,9 @@
 const fs = require('fs');
 const util = require('./util.js');
 
-module.exports = function readInput() {
+module.exports = readInput;
+
+function readInput() {
     const allFileContents = fs.readFileSync('input', 'utf-8');
     
     const result = [];

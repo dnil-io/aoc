@@ -7,7 +7,6 @@ const filteredSensors = [];
 
 for(let sensorA of sensors) {
     for(let sensorB of sensors) {
-        if(sensorA === sensorB) continue;
         if(util.distanceBetweenSensors(sensorA, sensorB) === 2) {
             filteredSensors.push(sensorA);
         }
@@ -16,6 +15,7 @@ for(let sensorA of sensors) {
 
 const bottomLeftSensor = util.findLower(filteredSensors)[0];
 const bottomRightSensor = util.findLower(filteredSensors)[1];
+
 const point = util.calculateUnreachablePoint(bottomLeftSensor, bottomRightSensor);
 
 console.log(point.x * 4000000 + point.y);
