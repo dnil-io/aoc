@@ -12,8 +12,7 @@ function distance(sensor, beacon) {
 }
 
 function distanceBetweenSensors(sensorA, sensorB) {
-    const sensorDistance = distance(sensorA, sensorB);
-    return sensorDistance - sensorA.reach - sensorB.reach;
+    return distance(sensorA, sensorB) - sensorA.reach - sensorB.reach;
 }
 
 function findLower(beacons) {
@@ -21,11 +20,11 @@ function findLower(beacons) {
 }
 
 function calculateUnreachablePoint(bottomLeft, bottomRight) {
-    const l = {x: left.x, y: left.y+left.reach + 1};
-    const r = {x: right.x, y: right.y+right.reach + 1};
+    const l = {x: bottomLeft.x, y: bottomLeft.y+bottomLeft.reach + 1};
+    const r = {x: bottomRight.x, y: bottomRight.y+bottomRight.reach + 1};
     const x = ((l.x+l.y)-(r.y-r.x))/2;
     return {
-        x: ((l.x+l.y)-(r.y-r.x))/2,
+        x: x,
         y: x+(r.y-r.x)
     }
 }
