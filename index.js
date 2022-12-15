@@ -3,18 +3,19 @@ const util = require("./util.js");
 
 const sensors = parse();
 
-console.log(sensors);
+const filteredSensors = [];
 
-let count = 0; 
-
-for(let i = -50000000; i < 50000000; i++) {
-    for(let sensor of sensors) {
-        const possibleBeaconPositon = {x: i, y: 2000000};
-        if(util.isInReach(sensor, possibleBeaconPositon) && !util.isBeaconPresent(sensors, possibleBeaconPositon)) {
-            count++;
-            break;
+for(let sensorA of sensors) {
+    for(let sensorB of sensors) {
+        if(sensorA === sensorB) continue;
+        if(util.distanceBetweenSensors(sensorA, sensorB) === 2) {
+            filteredSensors.push(sensorA);
         }
     }
 }
 
-console.log(count);
+const bottomLeftSensor = util.findLower(filteredSensors)[0];
+const bottomRightSensor = util.findLower(filteredSensors)[1];
+const point = util.calculateUnreachablePoint(bottomLeftSensor, bottomRightSensor);
+
+console.log(point.x * 4000000 + point.y);
